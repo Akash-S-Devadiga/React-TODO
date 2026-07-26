@@ -16,7 +16,7 @@ function App() {
   function submit(){
     setTasks([...tasks,task])
     console.log(tasks)
-    setTask(" ")
+    setTask("")
   }
 
   return (
@@ -48,11 +48,19 @@ function App() {
         </div>
 
         <div className="mt-8 bg-slate-700 rounded-xl p-4 min-h-[70px] text-white text-lg">
-          {tasks.map((data,index)=>{
-           return( <div className='flex justify-between p-5 border-2 m-2 text-2xl' key={index}>{data} 
+          {tasks.length === 0 ? (
+            <div className='text-center text-2xl'>No Tasks</div>
+          ) : (
+            tasks.map((data,index)=>{
+             return(
+              <div className='flex justify-between p-5 border-2 m-2 text-2xl'
+              key={index}>{data} 
+              <div className='flex justify-between w-30'><button className='bg-blue-500 rounded-2xl size-12'
+             onClick={()=>{}}>Edit</button>
             <button className='bg-red-800 rounded-2xl size-12'
-             onClick={()=>{setTasks(tasks.filter((data,ind)=>ind!=index))}}>Del</button></div>
-          )})}
+             onClick={()=>{setTasks(tasks.filter((data,ind)=>ind!=index))}}>Del</button>
+             </div></div>
+            )}))}
         </div>
 
       </div>
