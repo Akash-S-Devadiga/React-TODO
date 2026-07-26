@@ -56,7 +56,12 @@ function App() {
               <div className='flex justify-between p-5 border-2 m-2 text-2xl'
               key={index}>{data} 
               <div className='flex justify-between w-30'><button className='bg-blue-500 rounded-2xl size-12'
-             onClick={()=>{}}>Edit</button>
+             onClick={()=>{
+              let store=prompt("Enter new task ");
+              const updatedTasks = [...tasks];
+              updatedTasks[index] = store;
+              setTasks(updatedTasks);
+             }}>Edit</button>
             <button className='bg-red-800 rounded-2xl size-12'
              onClick={()=>{setTasks(tasks.filter((data,ind)=>ind!=index))}}>Del</button>
              </div></div>
