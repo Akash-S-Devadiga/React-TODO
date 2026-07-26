@@ -14,6 +14,11 @@ function App() {
   }
 
   function submit(){
+
+    if(task===""){
+      alert("Please enter a task");
+      return;
+    }
     setTasks([...tasks,task])
     console.log(tasks)
     setTask("")
