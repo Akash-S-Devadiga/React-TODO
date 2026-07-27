@@ -19,7 +19,9 @@ function App() {
       alert("Please enter a task");
       return;
     }
-    setTasks([...tasks,task])
+     setTasks([...tasks,task])
+    localStorage.setItem("task",JSON.stringify(tasks))
+   
     console.log(tasks)
     setTask("")
   }
@@ -56,7 +58,7 @@ function App() {
           {tasks.length === 0 ? (
             <div className='text-center text-2xl'>No Tasks</div>
           ) : (
-            tasks.map((data,index)=>{
+            JSON.parse(localStorage.getItem("task") || "[]").map((data,index)=>{
              return(
               <div className='flex justify-between p-5 border-2 m-2 text-2xl'
               key={index}>{data} 
