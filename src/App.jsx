@@ -79,7 +79,7 @@ useEffect(() => {
               setTasks(updatedTasks);
              }}>Edit</button>
             <button className='bg-red-800 rounded-2xl size-12'
-             onClick={()=>{JSON.parse(localStorage.getItem("tasks")).filter((data,ind)=>ind!=index)}}>Del</button>
+             onClick={()=>{setTasks(tasks.filter((data,ind)=>ind!=index))}}>Del</button>
              </div></div>
             )}))}
         </div>
