@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function App() {
 
   const [task, setTask] = useState("")
   const [tasks, setTasks] = useState([])
+
+  useEffect(()=>{
+   const storedTasks = localStorage.getItem("tasks")
+   setTasks(storedTasks ? JSON.parse(storedTasks) : [])
+},[])
+
 
   function submithandler(e) {
     
@@ -14,17 +20,20 @@ function App() {
   }
 
   function submit(){
-
+    
     if(task===""){
       alert("Please enter a task");
       return;
     }
-     setTasks([...tasks,task])
-    localStorage.setItem("task",JSON.stringify(tasks))
-   
-    console.log(tasks)
-    setTask("")
+
+   setTasks([...tasks,task])
+  
   }
+
+useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    setTask("");
+}, [tasks]);
 
   return (
     <div className="bg-slate-950 min-h-screen flex justify-center items-center">
@@ -58,7 +67,7 @@ function App() {
           {tasks.length === 0 ? (
             <div className='text-center text-2xl'>No Tasks</div>
           ) : (
-            JSON.parse(localStorage.getItem("task") || "[]").map((data,index)=>{
+            tasks.map((data,index)=>{
              return(
               <div className='flex justify-between p-5 border-2 m-2 text-2xl'
               key={index}>{data} 
@@ -70,7 +79,7 @@ function App() {
               setTasks(updatedTasks);
              }}>Edit</button>
             <button className='bg-red-800 rounded-2xl size-12'
-             onClick={()=>{setTasks(tasks.filter((data,ind)=>ind!=index))}}>Del</button>
+             onClick={()=>{JSON.parse(localStorage.getItem("tasks")).filter((data,ind)=>ind!=index)}}>Del</button>
              </div></div>
             )}))}
         </div>
