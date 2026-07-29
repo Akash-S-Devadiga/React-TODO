@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 function App() {
 
   const [task, setTask] = useState("")
@@ -36,7 +35,11 @@ useEffect(() => {
 }, [tasks]);
 
   return (
+    
+
     <div className="bg-slate-950 min-h-screen flex justify-center items-center">
+
+     
 
       <div className="w-[600px] bg-slate-800 rounded-2xl shadow-2xl p-8">
 
