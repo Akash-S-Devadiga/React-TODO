@@ -34,11 +34,6 @@ function App() {
       .catch((err) => {
         console.log("catched " + err)
       })
-
-
-
-
-
   }
 
   useEffect(() => {
@@ -92,12 +87,25 @@ function App() {
                   <div className='flex justify-between w-30'><button className='bg-blue-500 rounded-2xl size-12'
                     onClick={() => {
                       let store = prompt("Enter new task ");
-                      const updatedTasks = [...tasks];
-                      updatedTasks[index] = store;
-                      setTasks(updatedTasks);
+                      axios.patch(`http://localhost:3000/data/${data._id}`, { todo: store })
+                        .then((res) => {
+                          console.log(res.data)
+                          const updatedTasks = [...tasks];
+                          updatedTasks[index].todo = store;
+                          setTasks(updatedTasks);
+                        })
+
                     }}>Edit</button>
                     <button className='bg-red-800 rounded-2xl size-12'
-                      onClick={() => { setTasks(tasks.filter((data, ind) => ind != index)) }}>Del</button>
+                      onClick={() => {
+                        axios.delete(`http://localhost:3000/data/${data._id}`)
+                          .then((res) => {
+                            console.log(res.data)
+                            setTasks(tasks.filter((item) => item._id !== data._id))
+                          })
+
+
+                      }}>Del</button>
                   </div></div>
               )
             }))}
